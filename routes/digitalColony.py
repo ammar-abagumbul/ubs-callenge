@@ -1,6 +1,8 @@
 import json
 from flask import jsonify, request
 from routes import app
+from flask import make_response
+
 
 def cal_weight(colony):
     return sum(int(digit) for digit in colony)
@@ -28,4 +30,7 @@ def evaluate():
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
-    return jsonify(result)
+    response = make_response(jsonify(result))
+    response.headers['Content-Type'] = 'application/json'
+    return response
+  
