@@ -19,7 +19,7 @@ def next_generation(colony):
     return new_colony
 
 @app.route('/digital-colony', methods=['POST'])
-def weight_after_gen(colony, generations):
+def evaluate():
     data = request.get_json()
     result = []
     for i in data:
@@ -28,4 +28,4 @@ def weight_after_gen(colony, generations):
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
-    return json.dumps(result)
+    return jsonify(result)
