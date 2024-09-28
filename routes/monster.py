@@ -29,10 +29,10 @@ def find_max_efficiency(time_frames):
     # Dynamic Programming base cases:
     rest[0] = 0  # Starting with rest, no penalty or points
     attack[0] = float("-inf")  # Can't start with attack
-    circle[0] = float("-inf")  # Can't start with circle
+    circle[0] = -time_frames[0]  # Can't start with circle
 
     # Iterate over the time frames
-    for i in range(1, n + 1):
+    for i in range(1, n):
         monsters = time_frames[i]
 
         # If we rest, we come from either attack or rest
