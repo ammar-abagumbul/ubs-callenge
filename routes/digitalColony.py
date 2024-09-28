@@ -33,4 +33,4 @@ def evaluate():
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
-        return jsonify(result)
+    return jsonify(result)
