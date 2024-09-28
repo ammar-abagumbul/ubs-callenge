@@ -30,9 +30,10 @@ def evaluate():
     for i in data:
         colony = i.get("colony")
         generations = i.get("generations")
-        for _ in range(len(generations)):
+        for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
+        return jsonify(result)
     response = make_response(jsonify(result))
     response.headers['Content-Type'] = 'application/json'
     return response
