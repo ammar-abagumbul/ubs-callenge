@@ -12,14 +12,15 @@ from nltk.corpus import words
 
 @app.route('/wordle-game', methods=['POST'])
 def wordle_game():
-    data = request.get_json()
-    guessHistory = data.get("guessHistory")
-    evaluationHistory = data.get("evaluationHistory")
-    try:
-        guess = playWordle(guessHistory, evaluationHistory)
-        return jsonify({'guess': guess})
-    except Exception as e:
-        return jsonify({"error": e})
+    # data = request.get_json()
+    # guessHistory = data.get("guessHistory")
+    # evaluationHistory = data.get("evaluationHistory")
+    # try:
+    #     guess = playWordle(guessHistory, evaluationHistory)
+    #     return jsonify({'guess': guess})
+    # except Exception as e:
+    #     return jsonify({"error": e})
+    return "Hello world"
 
 def playWordle(guess_history, evaluation_history):
     
