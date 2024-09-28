@@ -28,10 +28,9 @@ def evaluate():
     data = request.get_json()
     result = []
     for i in data:
-        return i
         colony = i.get("colony")
         generations = i.get("generations")
-        for _ in range(generations):
+        for _ in range(len(generations)):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
     response = make_response(jsonify(result))
