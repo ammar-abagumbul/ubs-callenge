@@ -14,8 +14,6 @@ nltk.download('words')
 from nltk.corpus import words
 possible_guesses = [word for word in words.words() if len(word) == 5 and word[0].islower()]
 
-app = Flask(__name__)
-
 @app.route('/', methods=['GET'])
 def default_route():
     return 'Python Template'
