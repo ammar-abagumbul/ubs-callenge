@@ -15,8 +15,11 @@ def wordle_game():
     data = request.get_json()
     guessHistory = data.get("guessHistory")
     evaluationHistory = data.get("evaluationHistory")
-    guess = playWordle(guessHistory, evaluationHistory)
-    return jsonify({'guess': guess})
+    try:
+        guess = playWordle(guessHistory, evaluationHistory)
+        return jsonify({'guess': guess})
+    except Exception as e:
+        return jsonify({"error": e})
 
 possible_guesses = [
         word for word in words.words() if len(word) == 5 and word[0].islower()
