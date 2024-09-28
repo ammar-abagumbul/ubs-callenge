@@ -10,6 +10,10 @@ possible_guesses = [word for word in words.words() if len(word) == 5 and word[0]
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Home Page"
+
 @app.route('/wordle-game', methods=['POST'])
 def weight_after_gen_route():
     data = request.get_json()
