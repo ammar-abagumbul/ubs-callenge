@@ -1,3 +1,6 @@
+from flask import jsonify, request
+from routes import app
+
 def cal_weight(colony):
     return sum(int(digit) for digit in colony)
 
@@ -14,8 +17,14 @@ def next_generation(colony):
         new_colony += str(new_digit) + colony[i+1]
     return new_colony
 
+@app.route('/digital-colony', methods=['POST'])
 def weight_after_gen(colony, generations):
-    for _ in range(generations):
-        colony = next_generation(colony)
-    return cal_weight(colony)
-print(weight_after_gen("914", 10))
+    data = request.get_json()
+    result = []
+    for i in data:
+        colony = data.get('colony')
+        generations = data.get('generations')
+        for _ in range(generations):
+            colony = next_generation(colony)
+        result.append(str(cal_weight(colony)))
+    return jsonify({result})
