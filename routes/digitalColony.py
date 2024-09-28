@@ -28,6 +28,7 @@ def evaluate():
     data = request.get_json()
     result = []
     for i in data:
+        return i
         colony = i.get("colony")
         generations = i.get("generations")
         for _ in range(generations):
@@ -36,6 +37,3 @@ def evaluate():
     response = make_response(jsonify(result))
     response.headers['Content-Type'] = 'application/json'
     return response
-  
-if __name__ == "__main__":
-    app.run(debug=True)
