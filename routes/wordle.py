@@ -21,11 +21,14 @@ def wordle_game():
     except Exception as e:
         return jsonify({"error": e})
 
-possible_guesses = [
+def playWordle(guess_history, evaluation_history):
+    
+    possible_guesses = [
         word for word in words.words() if len(word) == 5 and word[0].islower()
     ]
-
-def playWordle(guess_history, evaluation_history):
+    
+    if len(guess_history) == 0:
+        return jsonify({'guess': possible_guesses[0]})
     
     not_solved_idx = [0, 1, 2, 3, 4]
     correct_letters = []
