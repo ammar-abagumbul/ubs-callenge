@@ -33,16 +33,18 @@ def find_max_efficiency(time_frames):
 
     # Iterate over the time frames
     for i in range(1, n + 1):
-        monsters = time_frames[i - 1]
+        monsters = time_frames[i]
 
         # If we rest, we come from either attack or rest
         rest[i] = max(rest[i - 1], attack[i - 1])
 
         # If we attack, we must have come from a circle with mana
-        attack[i] = circle[i - 1] + monsters if i > 1 else float("-inf")
+        attack[i] = circle[i - 1] + monsters if i > 1 else monsters
 
         # If we enter a circle, it must come from rest or attack, not another circle
-        circle[i] = max(rest[i - 1] - monsters, attack[i - 1] - monsters)
+        circle[i] = max(
+            rest[i - 1] - monsters, attack[i - 1] - monsters if i > 1 else -monsters
+        )
 
     # The answer is the maximum efficiency at the last time frame
     return max(rest[n], attack[n])
