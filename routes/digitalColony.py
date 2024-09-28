@@ -22,6 +22,9 @@ def next_generation(colony):
 
 @app.route('/digital-colony', methods=['POST'])
 def evaluate():
+    if request.content_type != 'application/json':
+        return jsonify({"error": "Request Content-Type must be application/json"}), 400
+
     data = request.get_json()
     result = []
     for i in data:
