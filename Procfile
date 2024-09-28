@@ -1,1 +1,1 @@
-bot: python wordle.py
+bot: python main.py
