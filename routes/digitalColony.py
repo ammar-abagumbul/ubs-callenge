@@ -23,8 +23,8 @@ def weight_after_gen(colony, generations):
     data = request.get_json()
     result = []
     for i in data:
-        colony = data.get('colony')
-        generations = data.get('generations')
+        colony = i.get('colony')
+        generations = i.get('generations')
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
