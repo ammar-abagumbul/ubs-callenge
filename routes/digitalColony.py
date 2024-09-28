@@ -22,18 +22,11 @@ def next_generation(colony):
 
 @app.route('/digital-colony', methods=['POST'])
 def evaluate():
-    # if request.content_type != 'application/json':
-    #     return jsonify({"error": "Request Content-Type must be application/json"}), 400
-
-    # data = request.get_json()
-    # if not isinstance(data, list) or len(data) != 2:
-    #     return jsonify({"error": "Request data must be a list with 2 items"}), 400
-
     data = request.get_json()
     result = []
     for i in data:
-        colony = i.get('colony')
-        generations = i.get('generations')
+        colony = i.get("colony")
+        generations = i.get("generations")
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
