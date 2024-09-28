@@ -1,3 +1,4 @@
+import json
 from flask import jsonify, request
 from routes import app
 
@@ -27,4 +28,4 @@ def weight_after_gen(colony, generations):
         for _ in range(generations):
             colony = next_generation(colony)
         result.append(str(cal_weight(colony)))
-    return jsonify({result})
+    return json.dumps(result)
