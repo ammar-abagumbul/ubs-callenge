@@ -21,7 +21,7 @@ def main():
 def find_max_efficiency(time_frames):
     n = len(time_frames)
     # Initialize dp arrays for 3 states: rest, attack, and circle
-    rest = [0] * (n + 1)
+    rest = [(0, False)] * (n + 1)
     attack = [0] * (n + 1)
     circle = [0] * (n + 1)
 
@@ -35,10 +35,17 @@ def find_max_efficiency(time_frames):
         monsters = time_frames[i]
 
         # If we rest, we come from either attack or rest
-        rest[i] = max(rest[i - 1], attack[i - 1], circle[i - 1])
+        rest[i][0] = max(rest[i - 1][0], attack[i - 1], circle[i - 1])
+
+        if circle[i - 1] == rest[i][0]:
+            rest[i][1] = True
+        else:
+            rest[i][1] = rest[i - 1][0]
 
         # If we attack, we must have come from a circle with mana
-        attack[i] = monsters + max(circle[i - 1], rest[i - 1])
+        attack[i] = monsters + max(
+            circle[i - 1], rest[i - 1][0] if rest[i - 1][1] else float("-inf")
+        )
         # If we enter a circle, it must come from rest or attack, not another circle
         circle[i] = max(rest[i - 1] - monsters)
 
